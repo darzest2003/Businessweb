@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Zest & Zafier - Perfumes</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<header>
+  <div class="logo">🌸 Zest&Zafier</div>
+
+  <div class="header-info">
+    <p>📧 farisdaar107@gmail.com</p>
+    <p>📞 +923444318078</p>
+  </div>
+
+  <div class="cart" onclick="openCart()">
+    🛒 Cart (<span id="cartCount">0</span>)
+  </div>
+</header>
+
+<!-- Sidebar -->
+<div class="sidebar">
+  <h3>Categories</h3>
+  <button onclick="filterCategory('all')">All</button>
+  <button onclick="filterCategory('perfume')">Perfumes</button>
+  <button onclick="filterCategory('body')">Body Sprays</button>
+  <button onclick="filterCategory('scents')">Scents</button>
+</div>
+
+<!-- Search -->
+<div class="search-bar">
+  <input type="text" id="searchInput" placeholder="Search perfumes..." onkeyup="searchProducts()"/>
+</div>
+
+<!-- Products -->
+<main class="grid" id="productGrid"></main>
+
+<!-- Cart Modal -->
+<div id="cartModal" class="modal">
+  <div class="modal-content">
+    <span onclick="closeCart()" class="close">×</span>
+    <h2>Your Cart</h2>
+    <div id="cartItems"></div>
+    <button onclick="openCheckout()" class="btn">Checkout</button>
+  </div>
+</div>
+
+<!-- Checkout Modal -->
+<div id="checkoutModal" class="modal">
+  <div class="modal-content large">
+    <span onclick="closeCheckout()" class="close">×</span>
+    <h2>Order Form</h2>
+
+    <input type="text" id="name" placeholder="Full Name"/>
+    <input type="text" id="address" placeholder="Address"/>
+    <input type="text" id="phone" placeholder="Phone Number"/>
+    
+    <button class="btn" onclick="submitOrder()">Place Order</button>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
