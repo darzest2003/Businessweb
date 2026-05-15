@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Product Details</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="productDetail"></div>
+
+<script>
+let products = [
+  {id:1,name:"Rose Perfume",price:20,img:"https://via.placeholder.com/300"},
+  {id:2,name:"Oud Spray",price:25,img:"https://via.placeholder.com/300"},
+  {id:3,name:"Fresh Scent",price:18,img:"https://via.placeholder.com/300"},
+  {id:4,name:"Luxury Oud",price:30,img:"https://via.placeholder.com/300"},
+  {id:5,name:"Night Body Mist",price:22,img:"https://via.placeholder.com/300"},
+  {id:6,name:"Amber Scent",price:28,img:"https://via.placeholder.com/300"}
+];
+
+let id = new URLSearchParams(window.location.search).get("id");
+let product = products.find(p=>p.id==id);
+
+document.getElementById("productDetail").innerHTML = `
+  <div class="modal-content large" style="margin:50px auto;display:block;">
+    <img src="${product.img}" style="width:100%">
+    <h2>${product.name}</h2>
+    <p>Price: $${product.price}</p>
+    <button class="btn">Buy Now</button>
+  </div>
+`;
+</script>
+
+</body>
+</html>
