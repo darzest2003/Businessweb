@@ -1,67 +1,245 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Zest & Zafier - Perfumes</title>
-  <link rel="stylesheet" href="style.css"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zest & Zaphier | Luxury Perfumes</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<header>
-  <div class="logo">🌸 Zest&Zafier</div>
-
-  <div class="header-info">
-    <p>📧 farisdaar107@gmail.com</p>
-    <p>📞 +923444318078</p>
-  </div>
-
-  <div class="cart" onclick="openCart()">
-    🛒 Cart (<span id="cartCount">0</span>)
-  </div>
-</header>
-
 <!-- Sidebar -->
-<div class="sidebar">
-  <h3>Categories</h3>
-  <button onclick="filterCategory('all')">All</button>
-  <button onclick="filterCategory('perfume')">Perfumes</button>
-  <button onclick="filterCategory('body')">Body Sprays</button>
-  <button onclick="filterCategory('scents')">Scents</button>
+<div id="sidebar" class="sidebar">
+    <span class="closebtn" onclick="closeMenu()">×</span>
+
+    <h2>Zest & Zaphier</h2>
+
+    <a href="#">Perfumes</a>
+    <a href="#">Body Sprays</a>
+    <a href="#">Luxury Scents</a>
+    <a href="#">Gift Sets</a>
+    <a href="#">Contact Us</a>
 </div>
 
+<!-- Header -->
+<header>
+
+<div class="menu-icon" onclick="openMenu()">
+☰
+</div>
+
+<div class="logo">
+Zest & Zaphier
+</div>
+
+<div class="cart-btn" onclick="openCheckoutLoader()">
+🛒 Cart
+</div>
+
+</header>
+
+<!-- Hero -->
+<section class="hero">
+
+<h1>Luxury Fragrances</h1>
+
+<p>
+Discover premium perfumes crafted for elegance,
+confidence and timeless sophistication.
+</p>
+
+</section>
+
 <!-- Search -->
-<div class="search-bar">
-  <input type="text" id="searchInput" placeholder="Search perfumes..." onkeyup="searchProducts()"/>
+<div class="search-container">
+<input
+type="text"
+id="searchInput"
+placeholder="Search perfume..."
+onkeyup="searchProducts()">
 </div>
 
 <!-- Products -->
-<main class="grid" id="productGrid"></main>
+<section class="products" id="productContainer">
 
-<!-- Cart Modal -->
-<div id="cartModal" class="modal">
-  <div class="modal-content">
-    <span onclick="closeCart()" class="close">×</span>
-    <h2>Your Cart</h2>
-    <div id="cartItems"></div>
-    <button onclick="openCheckout()" class="btn">Checkout</button>
-  </div>
+<div class="product-card">
+<img src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=500">
+<h3>Royal Oud</h3>
+<p>$49</p>
+<button>Add To Cart</button>
 </div>
 
-<!-- Checkout Modal -->
-<div id="checkoutModal" class="modal">
-  <div class="modal-content large">
-    <span onclick="closeCheckout()" class="close">×</span>
-    <h2>Order Form</h2>
-
-    <input type="text" id="name" placeholder="Full Name"/>
-    <input type="text" id="address" placeholder="Address"/>
-    <input type="text" id="phone" placeholder="Phone Number"/>
-    
-    <button class="btn" onclick="submitOrder()">Place Order</button>
-  </div>
+<div class="product-card">
+<img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?w=500">
+<h3>Golden Rose</h3>
+<p>$45</p>
+<button>Add To Cart</button>
 </div>
 
-<script src="script.js"></script>
+<div class="product-card">
+<img src="https://images.unsplash.com/photo-1615634260167-c8cdede054de?w=500">
+<h3>Velvet Musk</h3>
+<p>$55</p>
+<button>Add To Cart</button>
+</div>
+
+<div class="product-card">
+<img src="https://images.unsplash.com/photo-1587017539504-67cfbddac569?w=500">
+<h3>Ocean Breeze</h3>
+<p>$39</p>
+<button>Add To Cart</button>
+</div>
+
+<div class="product-card">
+<img src="https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=500">
+<h3>Midnight Black</h3>
+<p>$59</p>
+<button>Add To Cart</button>
+</div>
+
+<div class="product-card">
+<img src="https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=500">
+<h3>Amber Elite</h3>
+<p>$65</p>
+<button>Add To Cart</button>
+</div>
+
+<div class="product-card">
+<img src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=500">
+<h3>Luxury Mist</h3>
+<p>$42</p>
+<button>Add To Cart</button>
+</div>
+
+<div class="product-card">
+<img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500">
+<h3>Rose Noir</h3>
+<p>$50</p>
+<button>Add To Cart</button>
+</div>
+
+<div class="product-card">
+<img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?w=500">
+<h3>Arabian Gold</h3>
+<p>$70</p>
+<button>Add To Cart</button>
+</div>
+
+<div class="product-card">
+<img src="https://images.unsplash.com/photo-1619994403073-2cec2f4a1f4d?w=500">
+<h3>Fresh Essence</h3>
+<p>$44</p>
+<button>Add To Cart</button>
+</div>
+
+<div class="product-card">
+<img src="https://images.unsplash.com/photo-1588405748880-12d1d2a59db9?w=500">
+<h3>Pure Elegance</h3>
+<p>$58</p>
+<button>Add To Cart</button>
+</div>
+
+<div class="product-card">
+<img src="https://images.unsplash.com/photo-1547996160-81dfa63595aa?w=500">
+<h3>Elite Signature</h3>
+<p>$75</p>
+<button>Add To Cart</button>
+</div>
+
+</section>
+
+<!-- Loader -->
+<div id="loaderPopup" class="popup">
+<div class="loader"></div>
+<p>Preparing Checkout...</p>
+</div>
+
+<!-- Checkout Form -->
+<div id="checkoutForm" class="popup">
+
+<div class="form-box">
+
+<h2>Customer Details</h2>
+
+<input type="text" placeholder="Full Name">
+
+<input type="text" placeholder="Contact Number">
+
+<input type="email" placeholder="Email Address">
+
+<textarea placeholder="Delivery Address"></textarea>
+
+<input type="text" placeholder="Postal Code">
+
+<select>
+<option>Cash On Delivery</option>
+<option>EasyPaisa</option>
+<option>JazzCash</option>
+<option>Bank Transfer</option>
+</select>
+
+<button class="submit-btn">
+Place Order
+</button>
+
+</div>
+</div>
+
+<script>
+
+function openMenu(){
+document.getElementById("sidebar").style.width="280px";
+}
+
+function closeMenu(){
+document.getElementById("sidebar").style.width="0";
+}
+
+function openCheckoutLoader(){
+
+document.getElementById("loaderPopup").style.display="flex";
+
+setTimeout(function(){
+
+document.getElementById("loaderPopup").style.display="none";
+
+document.getElementById("checkoutForm").style.display="flex";
+
+},2000);
+
+}
+
+window.onclick=function(event){
+
+if(event.target==document.getElementById("checkoutForm")){
+
+document.getElementById("checkoutForm").style.display="none";
+
+}
+
+}
+
+function searchProducts(){
+
+let input=document.getElementById("searchInput").value.toLowerCase();
+
+let cards=document.querySelectorAll(".product-card");
+
+cards.forEach(card=>{
+
+let title=card.querySelector("h3").innerText.toLowerCase();
+
+card.style.display=title.includes(input) ? "block":"none";
+
+});
+
+}
+
+</script>
+
 </body>
 </html>
