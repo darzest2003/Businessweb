@@ -215,3 +215,39 @@ animation:spin 1s linear infinite;
 transform:rotate(360deg);
 }
 }
+.products{
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    gap:25px;
+    padding:40px;
+}
+
+@media(max-width:1400px){
+    .products{
+        grid-template-columns:repeat(5,1fr);
+    }
+}
+
+@media(max-width:1200px){
+    .products{
+        grid-template-columns:repeat(4,1fr);
+    }
+}
+
+@media(max-width:900px){
+    .products{
+        grid-template-columns:repeat(3,1fr);
+    }
+}
+
+@media(max-width:650px){
+    .products{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:450px){
+    .products{
+        grid-template-columns:1fr;
+    }
+}
