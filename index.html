@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Zest & Zafier | Luxury Perfumes</title>
+<title>Zest & Zafier</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
@@ -12,212 +12,77 @@
 
 <body>
 
-<!-- Sidebar -->
-<div id="sidebar" class="sidebar">
-    <span class="closebtn" onclick="closeMenu()">×</span>
-
-    <h2>Zest & Zafier</h2>
-
-    <a href="#">Perfumes</a>
-    <a href="#">Body Sprays</a>
-    <a href="#">Luxury Scents</a>
-    <a href="#">Gift Sets</a>
-    <a href="#">Contact Us</a>
-</div>
-
-<!-- Header -->
+<!-- HEADER -->
 <header>
-
-<div class="menu-icon" onclick="openMenu()">
-☰
-</div>
-
-<div class="logo">
-Zest & Zafier
-</div>
-
-<div class="cart-btn" onclick="openCheckoutLoader()">
-🛒 Cart
-</div>
-
+  <div class="menu-icon" onclick="openMenu()">☰</div>
+  <div class="logo">Zest & Zafier</div>
+  <div class="cart-btn" onclick="openCart()">
+    🛒 Cart (<span id="cartCount">0</span>)
+  </div>
 </header>
 
-<!-- Hero -->
+<!-- HERO -->
 <section class="hero">
-
-<h1>Luxury Fragrances</h1>
-
-<p>
-Discover premium perfumes crafted for elegance,
-confidence and timeless sophistication.
-</p>
-
+  <h1>Luxury Fragrances</h1>
+  <p>Discover premium perfumes crafted for elegance.</p>
 </section>
 
-<!-- Search -->
+<!-- SEARCH -->
 <div class="search-container">
-<input
-type="text"
-id="searchInput"
-placeholder="Search perfume..."
-onkeyup="searchProducts()">
+  <input type="text" id="searchInput" onkeyup="searchProducts()" placeholder="Search perfume...">
 </div>
 
-<!-- Products -->
-<section class="products" id="productContainer">
+<!-- PRODUCTS -->
+<section class="products" id="productContainer"></section>
 
-<div class="product-card">
-<img src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=500">
-<h3>Royal Oud</h3>
-<p>$49</p>
-<button onclick="addToCart(this)">Add To Cart</button>
-</div>
+<!-- CART SIDEBAR -->
+<div id="cartSidebar" class="cart-sidebar">
+  <div class="cart-header">
+    <h2>Your Cart</h2>
+    <span onclick="closeCart()" style="cursor:pointer;font-size:24px;">×</span>
+  </div>
 
-<div class="product-card">
-<img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?w=500">
-<h3>Golden Rose</h3>
-<p>$45</p>
-<button onclick="addToCart(this)">Add To Cart</button>
-</div>
-
-<div class="product-card">
-<img src="https://images.unsplash.com/photo-1615634260167-c8cdede054de?w=500">
-<h3>Velvet Musk</h3>
-<p>$55</p>
-<button onclick="addToCart(this)">Add To Cart</button>
-</div>
-
-<div class="product-card">
-<img src="https://images.unsplash.com/photo-1587017539504-67cfbddac569?w=500">
-<h3>Ocean Breeze</h3>
-<p>$39</p>
-<button onclick="addToCart(this)">Add To Cart</button>
-</div>
-
-<div class="product-card">
-<img src="https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=500">
-<h3>Midnight Black</h3>
-<p>$59</p>
-<button onclick="addToCart(this)">Add To Cart</button>
-</div>
-
-<div class="product-card">
-<img src="https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=500">
-<h3>Amber Elite</h3>
-<p>$65</p>
-<button onclick="addToCart(this)">Add To Cart</button>
-</div>
-
-<div class="product-card">
-<img src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=500">
-<h3>Luxury Mist</h3>
-<p>$42</p>
-<button onclick="addToCart(this)">Add To Cart</button>
-</div>
-
-<div class="product-card">
-<img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500">
-<h3>Rose Noir</h3>
-<p>$50</p>
-<button onclick="addToCart(this)">Add To Cart</button>
-</div>
-
-</section>
-
-<!-- Loader -->
-<div id="loaderPopup" class="popup">
-<div class="loader"></div>
-<p>Preparing Checkout...</p>
-</div>
-
-    <div id="cartSidebar">
   <div id="cartItems"></div>
-  <h3>Total: $<span id="cartTotal">0</span></h3>
-  <span id="cartCount">0</span>
-    </div>
-    
-<!-- Checkout Form -->
+
+  <div class="cart-footer">
+    <h3>Total: $<span id="cartTotal">0</span></h3>
+    <button onclick="openCheckoutLoader()">Checkout</button>
+  </div>
+</div>
+
+<!-- LOADER -->
+<div id="loaderPopup" class="popup">
+  <div class="loader"></div>
+  <p>Preparing Checkout...</p>
+</div>
+
+<!-- CHECKOUT -->
 <div id="checkoutForm" class="popup">
+  <div class="form-box">
+    <h2>Customer Details</h2>
 
-<div class="form-box">
+    <input id="name" type="text" placeholder="Full Name">
+    <input id="phone" type="text" placeholder="Phone">
+    <textarea id="address" placeholder="Address"></textarea>
 
-<h2>Customer Details</h2>
+    <select>
+      <option>Cash On Delivery</option>
+      <option>EasyPaisa</option>
+      <option>JazzCash</option>
+    </select>
 
-<input type="text" placeholder="Full Name">
-
-<input type="text" placeholder="Contact Number">
-
-<input type="email" placeholder="Email Address">
-
-<textarea placeholder="Delivery Address"></textarea>
-
-<input type="text" placeholder="Postal Code">
-
-<select>
-<option>Cash On Delivery</option>
-<option>EasyPaisa</option>
-<option>JazzCash</option>
-<option>Bank Transfer</option>
-</select>
-
-<button class="submit-btn" onclick="placeOrder()">Place Order</button>
-Place Order
-</button>
-
-</div>
+    <button class="submit-btn" onclick="submitOrder()">Place Order</button>
+  </div>
 </div>
 
-<script>
+<!-- SUCCESS -->
+<div id="successPopup" class="success-popup">
+  <div class="success-box">
+    <h2>🎉 Order Placed!</h2>
+    <button onclick="closeSuccess()">Continue</button>
+  </div>
+</div>
 
-function openMenu(){
-document.getElementById("sidebar").style.width="280px";
-}
-
-function closeMenu(){
-document.getElementById("sidebar").style.width="0";
-}
-
-function openCheckoutLoader(){
-
-document.getElementById("loaderPopup").style.display="flex";
-
-setTimeout(function(){
-
-document.getElementById("loaderPopup").style.display="none";
-
-document.getElementById("checkoutForm").style.display="flex";
-
-},2000);
-
-}
-
-window.onclick=function(event){
-
-if(event.target==document.getElementById("checkoutForm")){
-
-document.getElementById("checkoutForm").style.display="none";
-
-}
-
-}
-
-function searchProducts(){
-
-let input=document.getElementById("searchInput").value.toLowerCase();
-
-let cards=document.querySelectorAll(".product-card");
-
-cards.forEach(card=>{
-
-let title=card.querySelector("h3").innerText.toLowerCase();
-
-card.style.display=title.includes(input) ? "block":"none";
-
-});
-}
-
-
-</script>
-
+<script src="script.js"></script>
 </body>
 </html>
