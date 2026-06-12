@@ -1,48 +1,43 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Product</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>Product</title>
+<link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<div id="productDetail"></div>
+<div class="product-page" id="productDetail"></div>
 
-<!-- CART -->
-<div id="cartSidebar" class="cart-sidebar">
-  <div class="cart-header">
-    <h2>Cart</h2>
-    <span onclick="closeCart()">×</span>
-  </div>
+<div id="cartDrawer" class="cart-drawer"></div>
 
-  <div id="cartItems"></div>
-
-  <div class="cart-footer">
-    <h3>Total: $<span id="cartTotal">0</span></h3>
-    <button onclick="openCheckoutLoader()">Checkout</button>
+<div id="checkoutModal" class="modal">
+  <div class="modal-box">
+    <h2>Checkout</h2>
+    <input id="name">
+    <input id="phone">
+    <textarea id="address"></textarea>
+    <button onclick="placeOrder()">Place Order</button>
   </div>
 </div>
 
-<!-- SUCCESS -->
-<div id="successPopup" class="success-popup">
-  <div class="success-box">
-    <h2>🎉 Order Placed!</h2>
-    <button onclick="closeSuccess()">Continue</button>
-  </div>
-</div>
+<div id="toast" class="toast"></div>
 
 <script src="script.js"></script>
 
 <script>
 let id = new URLSearchParams(window.location.search).get("id");
-let product = products.find(p => p.id == id);
+let p = products.find(x => x.id == id);
 
 document.getElementById("productDetail").innerHTML = `
-  <div class="product-detail">
-    <img src="${product.img}">
-    <h2>${product.name}</h2>
-    <p>$${product.price}</p>
-    <button onclick="addToCart(${product.id})">Add to Cart</button>
+  <div class="product-single">
+    <img src="${p.img}">
+    <div>
+      <h1>${p.name}</h1>
+      <p>$${p.price}</p>
+      <button onclick="addToCart(${p.id})">Add to Cart</button>
+    </div>
   </div>
 `;
 </script>
