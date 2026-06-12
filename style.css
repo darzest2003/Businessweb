@@ -258,7 +258,5 @@ header{
 @media(max-width:500px){
   .products{grid-template-columns:1fr;}
   }
-.form-box{
-  position:relative;
-}
+
  
