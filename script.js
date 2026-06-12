@@ -1,20 +1,18 @@
 let products = [
-  {id:1,name:"Rose Perfume",price:20,img:"https://via.placeholder.com/150"},
-  {id:2,name:"Oud Spray",price:25,img:"https://via.placeholder.com/150"},
-  {id:3,name:"Fresh Scent",price:18,img:"https://via.placeholder.com/150"},
-  {id:4,name:"Luxury Oud",price:30,img:"https://via.placeholder.com/150"},
-  {id:5,name:"Night Mist",price:22,img:"https://via.placeholder.com/150"},
-  {id:6,name:"Amber Scent",price:28,img:"https://via.placeholder.com/150"}
+  {id:1,name:"Rose Oud",price:20,img:"https://via.placeholder.com/300"},
+  {id:2,name:"Amber Gold",price:25,img:"https://via.placeholder.com/300"},
+  {id:3,name:"Velvet Musk",price:18,img:"https://via.placeholder.com/300"},
+  {id:4,name:"Royal Essence",price:30,img:"https://via.placeholder.com/300"},
 ];
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 /* INIT */
-renderProducts();
+render();
 updateCart();
 
 /* PRODUCTS */
-function renderProducts(list = products){
+function render(list = products){
   let box = document.getElementById("productContainer");
   if(!box) return;
 
@@ -22,143 +20,116 @@ function renderProducts(list = products){
 
   list.forEach(p=>{
     box.innerHTML += `
-      <div class="product-card" onclick="openProduct(${p.id})">
+      <div class="card" onclick="openProduct(${p.id})">
         <img src="${p.img}">
         <h3>${p.name}</h3>
         <p>$${p.price}</p>
         <button onclick="event.stopPropagation(); addToCart(${p.id})">
-          Add To Cart
+          Add to Cart
         </button>
       </div>
     `;
   });
 }
 
-/* ADD TO CART */
+/* CART */
 function addToCart(id){
-  let item = products.find(p => p.id === id);
+  let item = products.find(p=>p.id==id);
+  let ex = cart.find(c=>c.id==id);
 
-  let existing = cart.find(c => c.id === id);
-
-  if(existing){
-    existing.qty++;
-  } else {
-    cart.push({...item, qty:1});
-  }
+  ex ? ex.qty++ : cart.push({...item,qty:1});
 
   save();
   updateCart();
-  openCart();
+  toast("Added to cart");
 }
 
-/* CART UI */
+/* UPDATE CART */
 function updateCart(){
   let box = document.getElementById("cartItems");
-  let totalBox = document.getElementById("cartTotal");
-  let countBox = document.getElementById("cartCount");
-
   if(!box) return;
-
-  box.innerHTML = "";
 
   let total = 0;
   let count = 0;
+
+  box.innerHTML = "";
 
   cart.forEach((c,i)=>{
     total += c.price * c.qty;
     count += c.qty;
 
     box.innerHTML += `
-      <div class="cart-item">
-        <p>${c.name}</p>
+      <div class="item">
+        <span>${c.name}</span>
 
-        <div>
-          <button onclick="changeQty(${i},-1)">-</button>
+        <div class="qty">
+          <button onclick="change(${i},-1)">-</button>
           <span>${c.qty}</span>
-          <button onclick="changeQty(${i},1)">+</button>
+          <button onclick="change(${i},1)">+</button>
         </div>
 
-        <span>$${c.price * c.qty}</span>
+        <b>$${c.price*c.qty}</b>
       </div>
     `;
   });
 
-  if(totalBox) totalBox.innerText = total.toFixed(2);
-  if(countBox) countBox.innerText = count;
+  document.getElementById("cartTotal").innerText = total.toFixed(2);
+  document.getElementById("cartCount").innerText = count;
 
   save();
 }
 
 /* QTY */
-function changeQty(i,val){
-  cart[i].qty += val;
-
-  if(cart[i].qty <= 0){
-    cart.splice(i,1);
-  }
-
+function change(i,v){
+  cart[i].qty += v;
+  if(cart[i].qty<=0) cart.splice(i,1);
   updateCart();
 }
 
-/* STORAGE */
-function save(){
-  localStorage.setItem("cart", JSON.stringify(cart));
-}
-
-/* CART OPEN/CLOSE */
+/* CART */
 function openCart(){
-  let el = document.getElementById("cartSidebar");
-  if(el) el.style.right = "0";
+  document.getElementById("cartDrawer").style.right="0";
 }
 
 function closeCart(){
-  let el = document.getElementById("cartSidebar");
-  if(el) el.style.right = "-350px";
+  document.getElementById("cartDrawer").style.right="-400px";
 }
 
-/* PRODUCT PAGE */
+/* PRODUCT */
 function openProduct(id){
-  window.location.href = "product.html?id=" + id;
+  location.href="product.html?id="+id;
 }
 
 /* SEARCH */
 function searchProducts(){
-  let val = document.getElementById("searchInput").value.toLowerCase();
-  let filtered = products.filter(p => p.name.toLowerCase().includes(val));
-  renderProducts(filtered);
+  let v = document.getElementById("searchInput").value.toLowerCase();
+  render(products.filter(p=>p.name.toLowerCase().includes(v)));
 }
 
 /* CHECKOUT */
-function openCheckoutLoader(){
-  document.getElementById("loaderPopup").style.display = "flex";
-
-  setTimeout(()=>{
-    document.getElementById("loaderPopup").style.display = "none";
-    document.getElementById("checkoutForm").style.display = "flex";
-  },1500);
+function openCheckout(){
+  document.getElementById("checkoutModal").style.display="flex";
 }
 
-/* ORDER */
-function submitOrder(){
-  let name = document.getElementById("name").value;
-  let phone = document.getElementById("phone").value;
-  let address = document.getElementById("address").value;
-
-  let items = cart.map(c => `${c.name} x${c.qty}`).join(", ");
-
-  let msg = `Order%0AName:${name}%0APhone:${phone}%0AAddress:${address}%0AItems:${items}`;
-
-  window.open("https://wa.me/923000000000?text=" + msg);
-
+function placeOrder(){
   cart = [];
   save();
   updateCart();
 
-  document.getElementById("checkoutForm").style.display = "none";
-  document.getElementById("successPopup").style.display = "flex";
+  document.getElementById("checkoutModal").style.display="none";
+  toast("Order placed successfully");
 }
 
-/* SUCCESS */
-function closeSuccess(){
-  document.getElementById("successPopup").style.display = "none";
+/* TOAST */
+function toast(msg){
+  let t = document.getElementById("toast");
+  t.innerText = msg;
+  t.classList.add("show");
+
+  setTimeout(()=>t.classList.remove("show"),2000);
+}
+
+/* SAVE */
+function save(){
+  localStorage.setItem("cart",JSON.stringify(cart));
 }
