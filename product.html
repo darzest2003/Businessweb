@@ -30,6 +30,28 @@ document.getElementById("productDetail").innerHTML = `
   </div>
 `;
 </script>
+  <div id="cartSidebar" class="cart-sidebar">
+
+  <div class="cart-header">
+    <h2>Your Cart</h2>
+    <span onclick="closeCart()" style="cursor:pointer;font-size:24px;">×</span>
+  </div>
+
+  <div id="cartItems"></div>
+
+  <div class="cart-footer">
+    <h3>Total: $<span id="cartTotal">0</span></h3>
+    <button onclick="openCheckoutLoader()">Checkout</button>
+  </div>
+
+  </div>
+  <div id="successPopup" class="success-popup">
+  <div class="success-box">
+    <h2>🎉 Order Placed!</h2>
+    <p>Thank you for shopping with Zest & Zaphier</p>
+    <button onclick="closeSuccess()">Continue Shopping</button>
+  </div>
+  </div>
 
 </body>
 </html>
