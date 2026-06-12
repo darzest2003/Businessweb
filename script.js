@@ -7,18 +7,23 @@ let products = [
   {id:6,name:"Amber Scent",price:28,cat:"scents",img:"https://via.placeholder.com/150"}
 ];
 
+/* ===================== CART STATE ===================== */
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
+/* ===================== PRODUCTS ===================== */
 function displayProducts(list){
   let grid = document.getElementById("productGrid");
   grid.innerHTML = "";
+
   list.forEach(p=>{
     grid.innerHTML += `
       <div class="card" onclick="openProduct(${p.id})">
         <img src="${p.img}">
         <h4>${p.name}</h4>
         <p>$${p.price}</p>
-        <button class="btn" onclick="event.stopPropagation(); addToCart(${p.id})">Add to Cart</button>
+        <button onclick="event.stopPropagation(); addToCart(${p.id})">
+          Add to Cart
+        </button>
       </div>
     `;
   });
@@ -26,69 +31,120 @@ function displayProducts(list){
 
 displayProducts(products);
 
-/* Cart */
+/* ===================== ADD TO CART ===================== */
 function addToCart(id){
-  let item = products.find(p=>p.id===id);
-  cart.push(item);
-  localStorage.setItem("cart",JSON.stringify(cart));
-  updateCart();
+  let item = products.find(p => p.id === id);
+
+  let existing = cart.find(c => c.id === id);
+
+  if(existing){
+    existing.qty += 1;
+  } else {
+    cart.push({...item, qty:1});
+  }
+
+  saveCart();
+  updateCartUI();
+  openCart();
 }
 
-function updateCart(){
-  document.getElementById("cartCount").innerText = cart.length;
+/* ===================== CART UI ===================== */
+function updateCartUI(){
+  let container = document.getElementById("cartItems");
+  let count = document.getElementById("cartCount");
+
+  container.innerHTML = "";
+  let total = 0;
+  let qtyTotal = 0;
+
+  cart.forEach((item, index)=>{
+    total += item.price * item.qty;
+    qtyTotal += item.qty;
+
+    container.innerHTML += `
+      <div class="cart-item">
+        <p>${item.name}</p>
+
+        <div>
+          <button onclick="changeQty(${index},-1)">-</button>
+          <span>${item.qty}</span>
+          <button onclick="changeQty(${index},1)">+</button>
+        </div>
+
+        <span>$${item.price * item.qty}</span>
+      </div>
+    `;
+  });
+
+  if(count) count.innerText = qtyTotal;
+  document.getElementById("cartTotal").innerText = total.toFixed(2);
+
+  saveCart();
 }
 
-/* Open Product Page */
+/* ===================== QUANTITY ===================== */
+function changeQty(index, val){
+  cart[index].qty += val;
+
+  if(cart[index].qty <= 0){
+    cart.splice(index,1);
+  }
+
+  updateCartUI();
+}
+
+/* ===================== STORAGE ===================== */
+function saveCart(){
+  localStorage.setItem("cart", JSON.stringify(cart));
+}
+
+/* ===================== CART OPEN/CLOSE ===================== */
+function openCart(){
+  document.getElementById("cartSidebar").style.right = "0";
+}
+
+function closeCart(){
+  document.getElementById("cartSidebar").style.right = "-350px";
+}
+
+/* ===================== PRODUCT PAGE ===================== */
 function openProduct(id){
-  window.open("product.html?id="+id,"_blank");
+  window.open("product.html?id=" + id, "_blank");
 }
 
-/* Search */
+/* ===================== SEARCH ===================== */
 function searchProducts(){
   let val = document.getElementById("searchInput").value.toLowerCase();
-  let filtered = products.filter(p=>p.name.toLowerCase().includes(val));
+  let filtered = products.filter(p =>
+    p.name.toLowerCase().includes(val)
+  );
   displayProducts(filtered);
 }
 
-/* Category */
+/* ===================== CATEGORY ===================== */
 function filterCategory(cat){
-  if(cat==="all") displayProducts(products);
-  else displayProducts(products.filter(p=>p.cat===cat));
+  if(cat === "all") displayProducts(products);
+  else displayProducts(products.filter(p => p.cat === cat));
 }
 
-/* Cart Modal */
-function openCart(){
-  document.getElementById("cartModal").style.display="block";
-  let div = document.getElementById("cartItems");
-  div.innerHTML = cart.map(c=>`<p>${c.name} - $${c.price}</p>`).join("");
-}
-function closeCart(){
-  document.getElementById("cartModal").style.display="none";
-}
-
-/* Checkout */
-function openCheckout(){
-  document.getElementById("checkoutModal").style.display="block";
-}
-
-function closeCheckout(){
-  document.getElementById("checkoutModal").style.display="none";
-}
-
-/* Submit Order */
+/* ===================== CHECKOUT (WHATSAPP) ===================== */
 function submitOrder(){
   let name = document.getElementById("name").value;
   let phone = document.getElementById("phone").value;
   let address = document.getElementById("address").value;
 
-  let msg = `Order from ${name}%0APhone:${phone}%0AAddress:${address}%0AItems:${cart.map(c=>c.name).join(",")}`;
+  let items = cart.map(c => `${c.name} x${c.qty}`).join(", ");
 
-  window.open(`https://wa.me/923444318078?text=${msg}`,"_blank");
+  let msg = `Order from ${name}%0APhone: ${phone}%0AAddress: ${address}%0AItems: ${items}`;
+
+  window.open(`https://wa.me/923444318078?text=${msg}`, "_blank");
 
   cart = [];
-  localStorage.removeItem("cart");
-  updateCart();
+  saveCart();
+  updateCartUI();
+
   closeCheckout();
 }
 
-updateCart();
+/* ===================== INIT ===================== */
+updateCartUI();
