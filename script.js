@@ -92,18 +92,3 @@ function submitOrder(){
 }
 
 updateCart();
-// Close checkout popup when clicking outside or on close button
-document.addEventListener("click", function (e) {
-  
-  const checkout = document.getElementById("checkoutForm");
-
-  // close when clicking outside form-box
-  if (e.target === checkout) {
-    checkout.style.display = "none";
-  }
-
-  // close when clicking any element with class "close-checkout"
-  if (e.target.classList.contains("close-checkout")) {
-    checkout.style.display = "none";
-  }
-});
