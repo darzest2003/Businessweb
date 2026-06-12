@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Product Details</title>
+  <title>Product</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div id="productDetail"></div>
 
-<!-- CART UI -->
+<!-- CART -->
 <div id="cartSidebar" class="cart-sidebar">
-
   <div class="cart-header">
-    <h2>Your Cart</h2>
-    <span onclick="closeCart()" style="cursor:pointer;font-size:24px;">×</span>
+    <h2>Cart</h2>
+    <span onclick="closeCart()">×</span>
   </div>
 
   <div id="cartItems"></div>
@@ -22,35 +21,30 @@
     <h3>Total: $<span id="cartTotal">0</span></h3>
     <button onclick="openCheckoutLoader()">Checkout</button>
   </div>
-
 </div>
 
 <!-- SUCCESS -->
 <div id="successPopup" class="success-popup">
   <div class="success-box">
     <h2>🎉 Order Placed!</h2>
-    <p>Thank you for shopping with Zest & Zaphier</p>
-    <button onclick="closeSuccess()">Continue Shopping</button>
+    <button onclick="closeSuccess()">Continue</button>
   </div>
 </div>
 
-<!-- ONLY ONE SCRIPT FILE -->
 <script src="script.js"></script>
 
 <script>
 let id = new URLSearchParams(window.location.search).get("id");
 let product = products.find(p => p.id == id);
 
-if(product){
-  document.getElementById("productDetail").innerHTML = `
-    <div class="modal-content large">
-      <img src="${product.img}">
-      <h2>${product.name}</h2>
-      <p>$${product.price}</p>
-      <button onclick="addToCart(${product.id})">Add to Cart</button>
-    </div>
-  `;
-}
+document.getElementById("productDetail").innerHTML = `
+  <div class="product-detail">
+    <img src="${product.img}">
+    <h2>${product.name}</h2>
+    <p>$${product.price}</p>
+    <button onclick="addToCart(${product.id})">Add to Cart</button>
+  </div>
+`;
 </script>
 
 </body>
