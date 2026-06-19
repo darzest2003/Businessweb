@@ -60,8 +60,36 @@
     <input id="email" placeholder="Email">
     <textarea id="address" placeholder="Address"></textarea>
 
-    <button onclick="orderNow()">Buy Now on WhatsApp</button>
+    <!-- UPDATED BUTTON -->
+    <button onclick="openCheckout()">Proceed to Checkout</button>
   </div>
+</div>
+
+<!-- 🔥 PREMIUM CHECKOUT PAGE -->
+<div id="checkout" class="checkout">
+
+  <div class="checkout-box">
+
+    <h2>Secure Checkout</h2>
+
+    <div class="summary">
+      <img id="cimg">
+      <div>
+        <h3 id="cname"></h3>
+        <p>Rs. 1500</p>
+      </div>
+    </div>
+
+    <input id="cqty" type="number" value="1">
+    <input id="cnameInput" placeholder="Full Name">
+    <input id="cphone" placeholder="Phone">
+    <input id="cemail" placeholder="Email">
+    <textarea id="caddress" placeholder="Address"></textarea>
+
+    <button onclick="placeOrder()">Place Order on WhatsApp</button>
+
+  </div>
+
 </div>
 
 <!-- ABOUT -->
@@ -126,6 +154,7 @@ let products = [
 
 let selectedProduct = null;
 
+/* PRODUCTS */
 function loadProducts(){
   let box = document.getElementById("products");
   box.innerHTML = "";
@@ -141,6 +170,7 @@ function loadProducts(){
   });
 }
 
+/* PRODUCT MODAL */
 function openProduct(id){
   selectedProduct = products.find(p=>p.id===id);
   document.getElementById("modal").style.display="flex";
@@ -153,26 +183,40 @@ function closeModal(){
   document.getElementById("modal").style.display="none";
 }
 
+/* SIDEBAR */
 function openSidebar(){
-  document.getElementById("sidebar").style.left="0";
-  document.getElementById("overlay").style.display="block";
+  document.getElementById("sidebar").classList.add("active");
+  document.getElementById("overlay").classList.add("show");
 }
 
 function closeSidebar(){
-  document.getElementById("sidebar").style.left="-260px";
-  document.getElementById("overlay").style.display="none";
+  document.getElementById("sidebar").classList.remove("active");
+  document.getElementById("overlay").classList.remove("show");
 }
 
-function orderNow(){
-  let qty = document.getElementById("qty").value;
-  let name = document.getElementById("name").value;
-  let phone = document.getElementById("phone").value;
-  let email = document.getElementById("email").value;
-  let address = document.getElementById("address").value;
+/* CHECKOUT OPEN */
+function openCheckout(){
 
-  let orderId = "ZZ" + Math.floor(Math.random()*999999);
+  document.getElementById("modal").style.display="none";
+  document.getElementById("checkout").style.display="flex";
 
-  let msg =
+  document.getElementById("cimg").src = selectedProduct.img;
+  document.getElementById("cname").innerText = selectedProduct.name;
+  document.getElementById("cqty").value = document.getElementById("qty").value;
+}
+
+/* PLACE ORDER */
+function placeOrder(){
+
+let qty = document.getElementById("cqty").value;
+let name = document.getElementById("cnameInput").value;
+let phone = document.getElementById("cphone").value;
+let email = document.getElementById("cemail").value;
+let address = document.getElementById("caddress").value;
+
+let orderId = "ZZ-" + Math.floor(Math.random()*999999);
+
+let msg =
 `*ZEST & ZEPHYR ORDER*
 
 Order ID: ${orderId}
@@ -189,10 +233,15 @@ ${address}
 
 Thank you for your order!`;
 
-  window.open("https://wa.me/923039724480?text="+encodeURIComponent(msg));
-  closeModal();
+window.open(
+"https://wa.me/923039724480?text="+encodeURIComponent(msg),
+"_blank"
+);
+
+document.getElementById("checkout").style.display="none";
 }
 
+/* INIT */
 loadProducts();
 </script>
 
