@@ -1,12 +1,12 @@
 body{
 margin:0;
 font-family:Poppins, sans-serif;
-background: radial-gradient(circle at top,#141414,#0b0b0b 70%);
+background: radial-gradient(circle at top,#1a1a1a,#0b0b0b 70%);
 color:#fff;
 overflow-x:hidden;
 }
 
-/* HEADER */
+/* ================= HEADER ================= */
 header{
 display:flex;
 justify-content:space-between;
@@ -16,19 +16,16 @@ position:sticky;
 top:0;
 z-index:1000;
 
-/* glass effect */
-background:rgba(0,0,0,0.55);
+background:rgba(0,0,0,0.6);
 backdrop-filter: blur(12px);
-
-border-bottom:1px solid rgba(255,215,0,0.2);
+border-bottom:1px solid rgba(212,175,55,0.25);
 }
 
 .logo{
-color:#d4af37;
 font-family:"Playfair Display", serif;
 font-size:22px;
+color:#d4af37;
 letter-spacing:1px;
-text-transform:uppercase;
 }
 
 .menu{
@@ -42,17 +39,17 @@ transition:0.3s;
 transform:rotate(90deg);
 }
 
-/* SIDEBAR */
+/* ================= SIDEBAR ================= */
 #sidebar{
 position:fixed;
-left:-300px;
+left:-320px;
 top:0;
 width:270px;
 height:100%;
 background:rgba(10,10,10,0.95);
-backdrop-filter: blur(10px);
+backdrop-filter: blur(12px);
 padding:25px;
-transition:0.35s ease;
+transition:0.4s ease;
 z-index:2000;
 border-right:1px solid rgba(212,175,55,0.3);
 }
@@ -66,27 +63,27 @@ display:block;
 color:#fff;
 text-decoration:none;
 margin:18px 0;
-font-size:16px;
+font-size:15px;
 transition:0.3s;
 }
 
 #sidebar a:hover{
 color:#d4af37;
-transform:translateX(5px);
+transform:translateX(6px);
 }
 
 .side-header{
 display:flex;
 justify-content:space-between;
 color:#d4af37;
-font-weight:600;
+font-family:"Playfair Display";
 }
 
-/* OVERLAY */
+/* ================= OVERLAY ================= */
 #overlay{
 position:fixed;
 inset:0;
-background:rgba(0,0,0,0.65);
+background:rgba(0,0,0,0.7);
 display:none;
 z-index:1500;
 }
@@ -95,7 +92,7 @@ z-index:1500;
 display:block;
 }
 
-/* HERO */
+/* ================= HERO ================= */
 .hero{
 text-align:center;
 padding:100px 20px;
@@ -106,9 +103,9 @@ url('https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fi
 
 .hero h1{
 font-size:48px;
-margin-bottom:10px;
 color:#d4af37;
 font-family:"Playfair Display", serif;
+margin-bottom:10px;
 }
 
 .hero p{
@@ -117,14 +114,14 @@ font-size:16px;
 }
 
 .hero button{
-margin-top:20px;
+margin-top:18px;
 padding:12px 26px;
-background:linear-gradient(135deg,#d4af37,#b88a2a);
 border:none;
+background:linear-gradient(135deg,#d4af37,#b88a2a);
 color:#000;
 font-weight:600;
-cursor:pointer;
 border-radius:30px;
+cursor:pointer;
 transition:0.3s;
 }
 
@@ -133,7 +130,7 @@ transform:scale(1.05);
 box-shadow:0 0 20px rgba(212,175,55,0.4);
 }
 
-/* PRODUCTS */
+/* ================= PRODUCTS ================= */
 .products{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
@@ -142,19 +139,20 @@ padding:50px 30px;
 }
 
 .card{
-background:rgba(255,255,255,0.03);
+background:rgba(255,255,255,0.04);
 border:1px solid rgba(212,175,55,0.2);
 border-radius:16px;
 overflow:hidden;
 cursor:pointer;
-transition:0.4s;
+transition:0.4s ease;
 backdrop-filter: blur(10px);
+position:relative;
 }
 
 .card:hover{
-transform:translateY(-10px);
-box-shadow:0 10px 25px rgba(0,0,0,0.6);
+transform:translateY(-12px);
 border-color:#d4af37;
+box-shadow:0 10px 30px rgba(0,0,0,0.7);
 }
 
 .card img{
@@ -171,6 +169,7 @@ transform:scale(1.08);
 .card h3{
 margin:10px 0 5px;
 color:#d4af37;
+font-family:"Playfair Display";
 }
 
 .card p{
@@ -178,7 +177,7 @@ margin-bottom:15px;
 opacity:0.8;
 }
 
-/* MODAL */
+/* ================= MODAL ================= */
 .modal{
 display:none;
 position:fixed;
@@ -213,42 +212,106 @@ border:none;
 outline:none;
 border-radius:8px;
 background:#1a1a1a;
-color:white;
+color:#fff;
 }
 
 .modal-box button{
 width:100%;
 padding:12px;
 margin-top:10px;
-background:linear-gradient(135deg,#d4af37,#b88a2a);
 border:none;
+border-radius:10px;
+background:linear-gradient(135deg,#d4af37,#b88a2a);
 font-weight:600;
 cursor:pointer;
-border-radius:10px;
 }
 
 .modal-box button:hover{
 transform:scale(1.03);
 }
 
-/* WHATSAPP */
+/* ================= CHECKOUT ================= */
+.checkout{
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.92);
+justify-content:center;
+align-items:center;
+z-index:5000;
+}
+
+.checkout-box{
+width:340px;
+background:rgba(15,15,15,0.96);
+border:1px solid #d4af37;
+padding:22px;
+border-radius:18px;
+text-align:center;
+backdrop-filter: blur(12px);
+}
+
+.checkout-box h2{
+color:#d4af37;
+font-family:"Playfair Display";
+}
+
+.summary{
+display:flex;
+align-items:center;
+gap:10px;
+margin:15px 0;
+text-align:left;
+}
+
+.summary img{
+width:70px;
+height:70px;
+border-radius:10px;
+object-fit:cover;
+border:1px solid #d4af37;
+}
+
+.checkout input,
+.checkout textarea{
+width:100%;
+margin:6px 0;
+padding:10px;
+background:#1a1a1a;
+border:none;
+color:#fff;
+border-radius:8px;
+}
+
+.checkout button{
+width:100%;
+padding:12px;
+margin-top:10px;
+background:linear-gradient(135deg,#d4af37,#b88a2a);
+border:none;
+font-weight:600;
+border-radius:10px;
+cursor:pointer;
+}
+
+/* ================= WHATSAPP ================= */
 .whatsapp{
 position:fixed;
 bottom:20px;
 right:20px;
-font-size:42px;
-background:#25D366;
 width:55px;
 height:55px;
 display:flex;
 align-items:center;
 justify-content:center;
+font-size:26px;
+background:#25D366;
 border-radius:50%;
 box-shadow:0 8px 20px rgba(0,0,0,0.4);
 z-index:4000;
 }
 
-/* SECTIONS */
+/* ================= SECTIONS ================= */
 .section{
 padding:60px 20px;
 text-align:center;
@@ -256,15 +319,22 @@ text-align:center;
 
 .section h2{
 color:#d4af37;
-font-family:"Playfair Display", serif;
-margin-bottom:15px;
+font-family:"Playfair Display";
 }
 
-/* FOOTER */
+/* ================= FOOTER ================= */
 footer{
 text-align:center;
 padding:20px;
-border-top:1px solid rgba(212,175,55,0.2);
 font-size:13px;
 opacity:0.7;
+border-top:1px solid rgba(212,175,55,0.2);
+}
+
+/* ================= RESPONSIVE ================= */
+@media(max-width:600px){
+.hero h1{font-size:32px;}
+.products{padding:30px 15px;}
+.checkout-box{width:90%;}
+.modal-box{width:90%;}
 }
