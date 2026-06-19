@@ -1,143 +1,200 @@
-:root{
-  --black:#0b0b0b;
-  --gold:#c8a96a;
-  --bg:#f7f7f7;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zest & Zephyr | Luxury Perfumes</title>
+
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<div id="overlay" onclick="closeSidebar()"></div>
+
+<div id="sidebar">
+  <div class="side-header">
+    <h2>Zest & Zephyr</h2>
+    <span onclick="closeSidebar()">✕</span>
+  </div>
+
+  <a href="#products">Perfumes</a>
+  <a href="#about">About</a>
+  <a href="#faq">FAQ</a>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="menu" onclick="openSidebar()">☰</div>
+  <div class="logo">Zest & Zephyr</div>
+  <div class="cart">🛒 <span id="cartCount">0</span></div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>Luxury Fragrance Collection</h1>
+  <p>Elegance. Confidence. Identity.</p>
+  <button onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">
+    Shop Now
+  </button>
+</section>
+
+<!-- PRODUCTS -->
+<section id="products" class="products"></section>
+
+<!-- PRODUCT MODAL -->
+<div id="modal" class="modal">
+  <div class="modal-box">
+    <span onclick="closeModal()" class="close">✕</span>
+    <img id="mimg">
+    <h2 id="mtitle"></h2>
+    <p id="mdesc"></p>
+    <h3>Rs. 1500</h3>
+
+    <input id="qty" type="number" placeholder="Quantity" value="1">
+    <input id="name" placeholder="Name">
+    <input id="phone" placeholder="Phone">
+    <input id="email" placeholder="Email">
+    <textarea id="address" placeholder="Address"></textarea>
+
+    <button onclick="orderNow()">Buy Now on WhatsApp</button>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about" class="section">
+  <h2>About Zest & Zephyr</h2>
+  <p>
+    Zest & Zephyr is a luxury fragrance brand crafted for those who
+    value elegance, personality, and long-lasting impression.
+    Each scent tells a story of confidence and sophistication.
+  </p>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="section">
+  <h2>FAQ</h2>
+
+  <div class="faq">
+    <h3>How long does fragrance last?</h3>
+    <p>8–12 hours premium lasting performance.</p>
+  </div>
+
+  <div class="faq">
+    <h3>Delivery time?</h3>
+    <p>2–5 working days across Pakistan.</p>
+  </div>
+
+  <div class="faq">
+    <h3>Is cash on delivery available?</h3>
+    <p>Yes, COD available nationwide.</p>
+  </div>
+</section>
+
+<!-- WHATSAPP FLOAT -->
+<a class="whatsapp" href="https://wa.me/923039724480" target="_blank">🟢</a>
+
+<!-- FOOTER -->
+<footer>
+  © 2026 Zest & Zephyr. All Rights Reserved.
+</footer>
+
+<script>
+let products = [
+  {
+    id:1,
+    name:"Royal Oud",
+    img:"images/royaloud.png",
+    desc:"Luxury oud fragrance with deep oriental notes."
+  },
+  {
+    id:2,
+    name:"Polo Sport",
+    img:"images/polosport.png",
+    desc:"Fresh sporty fragrance with energetic citrus blend."
+  },
+  {
+    id:3,
+    name:"Noir",
+    img:"images/noir.png",
+    desc:"Dark seductive scent with vanilla & leather tones."
+  }
+];
+
+let selectedProduct = null;
+
+function loadProducts(){
+  let box = document.getElementById("products");
+  box.innerHTML = "";
+
+  products.forEach(p=>{
+    box.innerHTML += `
+      <div class="card" onclick="openProduct(${p.id})">
+        <img src="${p.img}">
+        <h3>${p.name}</h3>
+        <p>Rs. 1500</p>
+      </div>
+    `;
+  });
 }
 
-/* BASE */
-*{margin:0;padding:0;box-sizing:border-box}
-body{
-  font-family:Poppins;
-  background:var(--bg);
+function openProduct(id){
+  selectedProduct = products.find(p=>p.id===id);
+  document.getElementById("modal").style.display="flex";
+  document.getElementById("mimg").src = selectedProduct.img;
+  document.getElementById("mtitle").innerText = selectedProduct.name;
+  document.getElementById("mdesc").innerText = selectedProduct.desc;
 }
 
-/* NAV */
-.nav{
-  position:sticky;
-  top:0;
-  display:flex;
-  justify-content:space-between;
-  padding:18px 40px;
-  background:rgba(0,0,0,.85);
-  backdrop-filter:blur(12px);
-  color:white;
+function closeModal(){
+  document.getElementById("modal").style.display="none";
 }
 
-.logo{
-  color:var(--gold);
-  font-family:"Playfair Display";
-  font-size:24px;
+function openSidebar(){
+  document.getElementById("sidebar").style.left="0";
+  document.getElementById("overlay").style.display="block";
 }
 
-.cart-icon{
-  background:var(--gold);
-  border:none;
-  padding:10px 18px;
-  border-radius:30px;
-  cursor:pointer;
+function closeSidebar(){
+  document.getElementById("sidebar").style.left="-260px";
+  document.getElementById("overlay").style.display="none";
 }
 
-/* HERO */
-.hero{
-  height:70vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  color:white;
-  background:url('https://images.unsplash.com/photo-1541643600914-78b084683601?w=1200') center/cover;
+function orderNow(){
+  let qty = document.getElementById("qty").value;
+  let name = document.getElementById("name").value;
+  let phone = document.getElementById("phone").value;
+  let email = document.getElementById("email").value;
+  let address = document.getElementById("address").value;
+
+  let orderId = "ZZ" + Math.floor(Math.random()*999999);
+
+  let msg =
+`*ZEST & ZEPHYR ORDER*
+
+Order ID: ${orderId}
+Product: ${selectedProduct.name}
+Price: Rs.1500
+Qty: ${qty}
+
+Name: ${name}
+Phone: ${phone}
+Email: ${email}
+
+Address:
+${address}
+
+Thank you for your order!`;
+
+  window.open("https://wa.me/923039724480?text="+encodeURIComponent(msg));
+  closeModal();
 }
 
-.hero h1{
-  font-size:60px;
-}
+loadProducts();
+</script>
 
-/* GRID */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:25px;
-  padding:50px;
-}
-
-.card{
-  background:white;
-  border-radius:18px;
-  overflow:hidden;
-  transition:.3s;
-  cursor:pointer;
-}
-
-.card:hover{
-  transform:translateY(-10px);
-}
-
-.card img{
-  width:100%;
-  height:240px;
-  object-fit:cover;
-}
-
-.card h3,p{padding:10px}
-
-/* CART */
-.cart-drawer{
-  position:fixed;
-  right:-400px;
-  top:0;
-  width:350px;
-  height:100%;
-  background:#111;
-  color:white;
-  transition:.4s;
-  padding:20px;
-}
-
-.item{
-  display:flex;
-  justify-content:space-between;
-  padding:10px 0;
-}
-
-/* MODAL */
-.modal{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.6);
-  justify-content:center;
-  align-items:center;
-}
-
-.modal-box{
-  background:white;
-  padding:30px;
-  border-radius:15px;
-  width:300px;
-}
-
-/* TOAST */
-.toast{
-  position:fixed;
-  bottom:20px;
-  left:50%;
-  transform:translateX(-50%);
-  background:black;
-  color:white;
-  padding:12px 20px;
-  border-radius:30px;
-  opacity:0;
-  transition:.3s;
-}
-
-.toast.show{opacity:1}
-
-/* RESPONSIVE */
-@media(max-width:900px){
-  .grid{grid-template-columns:repeat(2,1fr)}
-}
-
-@media(max-width:500px){
-  .grid{grid-template-columns:1fr}
-  .hero h1{font-size:40px}
-}
+</body>
+</html>
