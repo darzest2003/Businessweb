@@ -3,75 +3,198 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Zest & Zafier</title>
+<title>Zest & Zephyr | Luxury Perfumes</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
 
-<!-- TOP BAR -->
-<header class="nav">
-  <div class="logo">Zest & Zafier</div>
+<!-- SIDEBAR -->
+<div id="overlay" onclick="closeSidebar()"></div>
 
-  <div class="nav-right">
-    <button class="cart-icon" onclick="openCart()">
-      🛒 <span id="cartCount">0</span>
-    </button>
+<div id="sidebar">
+  <div class="side-header">
+    <h2>Zest & Zephyr</h2>
+    <span onclick="closeSidebar()">✕</span>
   </div>
+
+  <a href="#products">Perfumes</a>
+  <a href="#about">About</a>
+  <a href="#faq">FAQ</a>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="menu" onclick="openSidebar()">☰</div>
+  <div class="logo">Zest & Zephyr</div>
+  <div class="cart">🛒 <span id="cartCount">0</span></div>
 </header>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-content">
-    <h1>Luxury Fragrances</h1>
-    <p>Crafted for elegance, confidence & identity</p>
+  <h1>Luxury Fragrance Collection</h1>
+  <p>Elegance. Confidence. Identity.</p>
+  <button onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">
+    Shop Now
+  </button>
+</section>
+
+<!-- PRODUCTS -->
+<section id="products" class="products"></section>
+
+<!-- PRODUCT MODAL -->
+<div id="modal" class="modal">
+  <div class="modal-box">
+    <span onclick="closeModal()" class="close">✕</span>
+    <img id="mimg">
+    <h2 id="mtitle"></h2>
+    <p id="mdesc"></p>
+    <h3>Rs. 1500</h3>
+
+    <input id="qty" type="number" placeholder="Quantity" value="1">
+    <input id="name" placeholder="Name">
+    <input id="phone" placeholder="Phone">
+    <input id="email" placeholder="Email">
+    <textarea id="address" placeholder="Address"></textarea>
+
+    <button onclick="orderNow()">Buy Now on WhatsApp</button>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about" class="section">
+  <h2>About Zest & Zephyr</h2>
+  <p>
+    Zest & Zephyr is a luxury fragrance brand crafted for those who
+    value elegance, personality, and long-lasting impression.
+    Each scent tells a story of confidence and sophistication.
+  </p>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="section">
+  <h2>FAQ</h2>
+
+  <div class="faq">
+    <h3>How long does fragrance last?</h3>
+    <p>8–12 hours premium lasting performance.</p>
+  </div>
+
+  <div class="faq">
+    <h3>Delivery time?</h3>
+    <p>2–5 working days across Pakistan.</p>
+  </div>
+
+  <div class="faq">
+    <h3>Is cash on delivery available?</h3>
+    <p>Yes, COD available nationwide.</p>
   </div>
 </section>
 
-<!-- SEARCH -->
-<div class="search">
-  <input id="searchInput" onkeyup="searchProducts()" placeholder="Search perfumes...">
-</div>
+<!-- WHATSAPP FLOAT -->
+<a class="whatsapp" href="https://wa.me/923039724480" target="_blank">🟢</a>
 
-<!-- PRODUCTS -->
-<section class="grid" id="productContainer"></section>
+<!-- FOOTER -->
+<footer>
+  © 2026 Zest & Zephyr. All Rights Reserved.
+</footer>
 
-<!-- CART DRAWER -->
-<div id="cartDrawer" class="cart-drawer">
+<script>
+let products = [
+  {
+    id:1,
+    name:"Royal Oud",
+    img:"images/royaloud.png",
+    desc:"Luxury oud fragrance with deep oriental notes."
+  },
+  {
+    id:2,
+    name:"Polo Sport",
+    img:"images/polosport.png",
+    desc:"Fresh sporty fragrance with energetic citrus blend."
+  },
+  {
+    id:3,
+    name:"Noir",
+    img:"images/noir.png",
+    desc:"Dark seductive scent with vanilla & leather tones."
+  }
+];
 
-  <div class="cart-header">
-    <h2>Your Cart</h2>
-    <span onclick="closeCart()">✕</span>
-  </div>
+let selectedProduct = null;
 
-  <div id="cartItems"></div>
+function loadProducts(){
+  let box = document.getElementById("products");
+  box.innerHTML = "";
 
-  <div class="cart-footer">
-    <h3>Total: $<span id="cartTotal">0</span></h3>
-    <button onclick="openCheckout()">Checkout</button>
-  </div>
-</div>
+  products.forEach(p=>{
+    box.innerHTML += `
+      <div class="card" onclick="openProduct(${p.id})">
+        <img src="${p.img}">
+        <h3>${p.name}</h3>
+        <p>Rs. 1500</p>
+      </div>
+    `;
+  });
+}
 
-<!-- CHECKOUT -->
-<div id="checkoutModal" class="modal">
-  <div class="modal-box">
+function openProduct(id){
+  selectedProduct = products.find(p=>p.id===id);
+  document.getElementById("modal").style.display="flex";
+  document.getElementById("mimg").src = selectedProduct.img;
+  document.getElementById("mtitle").innerText = selectedProduct.name;
+  document.getElementById("mdesc").innerText = selectedProduct.desc;
+}
 
-    <h2>Checkout</h2>
+function closeModal(){
+  document.getElementById("modal").style.display="none";
+}
 
-    <input id="name" placeholder="Full Name">
-    <input id="phone" placeholder="Phone">
-    <textarea id="address" placeholder="Address"></textarea>
+function openSidebar(){
+  document.getElementById("sidebar").style.left="0";
+  document.getElementById("overlay").style.display="block";
+}
 
-    <button onclick="placeOrder()">Place Order</button>
+function closeSidebar(){
+  document.getElementById("sidebar").style.left="-260px";
+  document.getElementById("overlay").style.display="none";
+}
 
-  </div>
-</div>
+function orderNow(){
+  let qty = document.getElementById("qty").value;
+  let name = document.getElementById("name").value;
+  let phone = document.getElementById("phone").value;
+  let email = document.getElementById("email").value;
+  let address = document.getElementById("address").value;
 
-<!-- TOAST -->
-<div id="toast" class="toast"></div>
+  let orderId = "ZZ" + Math.floor(Math.random()*999999);
 
-<script src="script.js"></script>
+  let msg =
+`*ZEST & ZEPHYR ORDER*
+
+Order ID: ${orderId}
+Product: ${selectedProduct.name}
+Price: Rs.1500
+Qty: ${qty}
+
+Name: ${name}
+Phone: ${phone}
+Email: ${email}
+
+Address:
+${address}
+
+Thank you for your order!`;
+
+  window.open("https://wa.me/923039724480?text="+encodeURIComponent(msg));
+  closeModal();
+}
+
+loadProducts();
+</script>
+
 </body>
 </html>
