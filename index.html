@@ -19,10 +19,20 @@
     <h2>Zest & Zephyr</h2>
     <span onclick="closeSidebar()">✕</span>
   </div>
+<a href="#products">Perfumes</a>
+<a href="#about">About</a>
+<a href="#faq">FAQ</a>
 
-  <a href="#products">Perfumes</a>
-  <a href="#about">About</a>
-  <a href="#faq">FAQ</a>
+<h3 style="color:gold;margin-top:25px;">Contact Us</h3>
+
+<a href="https://wa.me/923039724480" target="_blank">
+📱 WhatsApp
+</a>
+
+<a href="https://www.instagram.com/zzbyhamzaqammer?utm_source=qr&igsh=MWo1bWJxd2s5cXR0ZQ==" target="_blank">
+📸 Instagram
+</a>
+  
 </div>
 
 <!-- HEADER -->
@@ -44,27 +54,34 @@
 <section id="products" class="products"></section>
 
 <!-- PRODUCT MODAL -->
-<div id="modal" class="modal">
-  <div class="modal-box">
-    <span onclick="closeModal()" class="close">✕</span>
+<span onclick="closeModal()" class="close">✕</span>
 
-    <img id="mimg">
-    <h2 id="mtitle"></h2>
-    <p id="mdesc"></p>
-    <h3>Rs. 1500</h3>
+<img id="mimg">
 
-    <input id="qty" type="number" placeholder="Quantity" value="1">
-    <input id="name" placeholder="Name">
-    <input id="phone" placeholder="Phone">
-    <input id="email" placeholder="Email">
-    <textarea id="address" placeholder="Address"></textarea>
+<h2 id="mtitle"></h2>
 
-    <button onclick="openCheckout()">Proceed to Checkout</button>
-  </div>
+<p id="mdesc"></p>
+
+<div class="product-price">
+Rs. 1500
+</div>
+
+<div class="product-features">
+
+✓ Premium Quality Fragrance<br>
+✓ Long Lasting Performance<br>
+✓ Elegant Luxury Packaging<br>
+✓ Delivery All Over Pakistan
+
+</div>
+
+<button class="premium-buy" onclick="openCheckout()">
+Buy Now
+</button>
 </div>
 
 <!-- CHECKOUT -->
-<div id="checkout" class="checkout">
+<div id="checkout" class="checkout" style="display:none;">
   <div class="checkout-box">
 
     <h2>Secure Checkout</h2>
@@ -117,7 +134,17 @@
 </section>
 
 <!-- WHATSAPP FLOAT -->
-<a class="whatsapp" href="https://wa.me/923039724480" target="_blank">🟢</a>
+<a
+class="whatsapp"
+href="https://wa.me/923039724480"
+target="_blank">
+
+<img
+src="https://cdn-icons-png.flaticon.com/512/733/733585.png"
+alt="WhatsApp"
+width="60">
+
+</a>
 
 <!-- FOOTER -->
 <footer>
@@ -140,12 +167,26 @@ function loadProducts(){
 
   products.forEach(p=>{
     box.innerHTML += `
-      <div class="card" onclick="openProduct(${p.id})">
-        <img src="${p.img}">
-        <h3>${p.name}</h3>
-        <p>Rs. 1500</p>
-      </div>
-    `;
+<div class="card" onclick="openProduct(${p.id})">
+
+<img src="${p.img}" alt="${p.name}">
+
+<h3>${p.name}</h3>
+
+<p>
+Premium luxury fragrance with long-lasting performance.
+</p>
+
+<div class="product-price">
+Rs. 1500
+</div>
+
+<button class="buy-btn">
+View Details
+</button>
+
+</div>
+`;
   });
 }
 
