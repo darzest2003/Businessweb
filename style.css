@@ -338,3 +338,91 @@ border-top:1px solid rgba(212,175,55,0.2);
 .checkout-box{width:90%;}
 .modal-box{width:90%;}
 }
+/* CONTACT */
+#sidebar h3{
+color:gold;
+border-top:1px solid rgba(255,215,0,.2);
+padding-top:20px;
+}
+
+#sidebar a:hover{
+color:gold;
+padding-left:10px;
+transition:.3s;
+}
+
+/* PRODUCT CARD */
+.card{
+overflow:hidden;
+transition:.4s;
+}
+
+.card img{
+transition:.5s;
+}
+
+.card:hover{
+transform:translateY(-10px);
+box-shadow:0 20px 40px rgba(255,215,0,.15);
+}
+
+.card:hover img{
+transform:scale(1.08);
+}
+
+.product-price{
+font-size:24px;
+font-weight:700;
+color:gold;
+margin:15px 0;
+}
+
+.buy-btn{
+width:100%;
+padding:12px;
+background:gold;
+color:black;
+font-weight:700;
+border:none;
+border-radius:10px;
+cursor:pointer;
+}
+
+.buy-btn:hover{
+transform:translateY(-2px);
+}
+
+/* PRODUCT VIEW */
+.product-features{
+line-height:2;
+margin:20px 0;
+color:#ddd;
+}
+
+.premium-buy{
+width:100%;
+padding:15px;
+font-size:18px;
+font-weight:700;
+background:gold;
+border:none;
+border-radius:12px;
+cursor:pointer;
+}
+
+.premium-buy:hover{
+box-shadow:0 10px 30px rgba(255,215,0,.3);
+}
+
+/* WHATSAPP */
+.whatsapp{
+position:fixed;
+right:20px;
+bottom:20px;
+z-index:999;
+transition:.3s;
+}
+
+.whatsapp:hover{
+transform:scale(1.1);
+}
