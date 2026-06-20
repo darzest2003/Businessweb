@@ -548,3 +548,26 @@ cursor:pointer;
 .whatsapp:hover{
 transform:scale(1.1);
 }
+.contact-link{
+display:flex;
+align-items:center;
+gap:12px;
+padding:12px;
+margin-top:10px;
+border:1px solid rgba(255,215,0,.2);
+border-radius:10px;
+background:#161616;
+transition:.3s;
+}
+
+.contact-link:hover{
+background:gold;
+color:black !important;
+transform:translateX(5px);
+box-shadow:0 0 15px rgba(255,215,0,.3);
+}
+
+.contact-link img{
+width:22px;
+height:22px;
+}
