@@ -266,17 +266,16 @@ let address = document.getElementById("caddress").value;
 let orderId = "ZZ-" + Math.floor(Math.random()*999999);
 
 let msg =
-`🌟 *ZEST & ZEPHYR ORDER REQUEST* 🌟
+`🌟 ZEST & ZEPHYR ORDER REQUEST 🌟
 
 📦 Order ID: ${orderId}
 📅 Date: ${new Date().toLocaleDateString()}
 
 🛍 Product: ${selectedProduct.name}
-💰 Price: Rs. 1500
 🔢 Quantity: ${qty}
 
-👤 Customer: ${name}
-📞 Phone: ${phone}
+👤 Customer Name: ${name}
+📞 Phone Number: ${phone}
 📧 Email: ${email}
 
 📍 Delivery Address:
@@ -284,19 +283,21 @@ ${address}
 
 ━━━━━━━━━━━━━━━
 
-⚠️ To confirm your order, please reply:
+💼 Order Status: Pending Confirmation
 
-*1* = Confirm Order ✅
+💰 Price & delivery charges will be confirmed by the Zest & Zephyr team before dispatch.
 
-After confirmation, your order will be processed and dispatched.
+✅ A representative will contact you shortly to verify your order details.
 
-Thank you for choosing *Zest & Zephyr* ✨`;
+⚠️ Orders are processed only after customer confirmation.
+
+Thank you for choosing Zest & Zephyr ✨
+Luxury. Confidence. Identity.`;
 
 window.open(
 "https://wa.me/923039724480?text=" + encodeURIComponent(msg),
 "_blank"
 );
-
 document.getElementById("checkout").style.display="none";
 }
 
