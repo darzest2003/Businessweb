@@ -266,22 +266,34 @@ let address = document.getElementById("caddress").value;
 let orderId = "ZZ-" + Math.floor(Math.random()*999999);
 
 let msg =
-`*ZEST & ZEPHYR ORDER*
+`🌟 *ZEST & ZEPHYR ORDER REQUEST* 🌟
 
-Order ID: ${orderId}
-Product: ${selectedProduct.name}
-Price: Rs.1500
-Qty: ${qty}
+📦 Order ID: ${orderId}
+📅 Date: ${new Date().toLocaleDateString()}
 
-Name: ${name}
-Phone: ${phone}
-Email: ${email}
+🛍 Product: ${selectedProduct.name}
+💰 Price: Rs. 1500
+🔢 Quantity: ${qty}
 
-Address:
-${address}`;
+👤 Customer: ${name}
+📞 Phone: ${phone}
+📧 Email: ${email}
+
+📍 Delivery Address:
+${address}
+
+━━━━━━━━━━━━━━━
+
+⚠️ To confirm your order, please reply:
+
+*1* = Confirm Order ✅
+
+After confirmation, your order will be processed and dispatched.
+
+Thank you for choosing *Zest & Zephyr* ✨`;
 
 window.open(
-"https://wa.me/923039724480?text="+encodeURIComponent(msg),
+"https://wa.me/923039724480?text=" + encodeURIComponent(msg),
 "_blank"
 );
 
